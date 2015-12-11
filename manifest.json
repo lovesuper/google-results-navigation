@@ -1,0 +1,72 @@
+{
+  "manifest_version": 2,
+  "name": "Google Results Navigation",
+  "version": "0.1",
+  "icons": {
+    "16": "images/icons/16.png",
+    "32": "images/icons/32.png",
+    "48": "images/icons/48.png",
+    "128": "images/icons/128.png"
+  },
+
+
+  "browser_action": {
+    "default_title": "Google Results Navigation"
+  },
+
+  "page_action": {
+    "default_icon": {
+       "19": "images/icons/19.png",     
+       "38": "images/icons/38.png"       
+    },
+
+    "default_title": "Google Results Navigation"     
+  },
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://google.com/*",
+    "https://google.com/*"
+  ],
+
+  "web_accessible_resources": ["images/*"],
+
+  "commands": {
+    "nextResult": {
+      "suggested_key": {
+        "default": "Tab",
+        "mac": "Tab"
+      },
+      "description": "Highlight next google result"
+    },
+    "prevResult": {
+      "suggested_key": {
+        "default": "Shift+Tab",
+        "mac": "Shift+Tab"
+      },
+      "description": "Highlight previous google result"
+    }
+  },
+
+  "background": {
+    "scripts": [
+      "lib/constants.js",
+      "src/background.js"
+    ],
+    "persistent": true
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://google.com/*",
+        "http://google.com/*"
+      ],
+      "js": [
+        "lib/jquery-2.1.4.min.js",
+        "src/content.js"
+      ]
+    }
+  ]
+}
